@@ -1,22 +1,21 @@
 package com.mock.ecommerce.service;
 
 import com.mock.ecommerce.entity.Customer;
+
 import com.mock.ecommerce.repo.CustomerRepo;
 import com.mock.ecommerce.repo.DAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 /**
- * author: CuongTTC
+ * author CuongTTC
  * */
-
 @Service
 @Transactional
 public class CustomerService implements DAO<Customer> {
-
 
     private final CustomerRepo customerRepo;
 
@@ -28,12 +27,12 @@ public class CustomerService implements DAO<Customer> {
 
     @Override
     public List<Customer> findALl() {
-        return customerRepo.findAll();
+        return customerRepo.findAll() ;
     }
 
     @Override
     public Customer findById(Long id) {
-        return customerRepo.findByUserId(id);
+        return customerRepo.findById(id).get();
     }
 
     @Override
@@ -55,3 +54,4 @@ public class CustomerService implements DAO<Customer> {
     }
 
 }
+//commit

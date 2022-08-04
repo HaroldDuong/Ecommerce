@@ -12,21 +12,16 @@ import java.util.Date;
  *
  * */
 @Entity
-@Table(name = "type")
-@RequiredArgsConstructor
+@Table(name = "types")
 @AllArgsConstructor
+@RequiredArgsConstructor
 @Data
 public class Type {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private  Long id;
 
     private String name;
-    private Date updated;
-    private boolean enabled;
-
-    @PrePersist
-    void updated(){
-        this.updated = new Date();
-    }
+    @ManyToOne(targetEntity = Category.class)
+    private Category category;
 }

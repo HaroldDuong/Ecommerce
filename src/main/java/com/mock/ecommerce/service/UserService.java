@@ -8,14 +8,12 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
-
-/**
+import java.util.List;
+/***
  * author CuongTTC
- *
  * */
-
 @Service
 @Transactional
 public class UserService implements UserDetailsService {
@@ -27,13 +25,25 @@ public class UserService implements UserDetailsService {
         this.userRepo = userRepo;
     }
 
+    public List<User> findAll(){
+    	return userRepo.findAll();
+    }
+
+    public User findById(Long id) {
+        return userRepo.findById(id).get();
+    }
+    
+    public void saveUser(User userD) {
+    	System.out.println(userD);
+        userRepo.save(userD);
+    }
+    
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepo.findByUserName(username);
-        if(user == null){
-            throw new UsernameNotFoundException("USer " + username + "not found!!" );
+        User user = userRepo.findByUsername(username);
+        if (user == null) {
+            throw new UsernameNotFoundException("User "+username+" not found!");
         }
-
         return new UserDetail(user);
     }
 
@@ -42,10 +52,9 @@ public class UserService implements UserDetailsService {
     }
 
 
-    public void processUserOAuth(String email, String username){
+    public void processUserOAuth(String email,String username) {
         int existUser = userRepo.countByEmail(email);
-
-        if (existUser == 0 ){
+        if (existUser == 0) {
             User newUser = new User();
             newUser.setRole("ROLE_USER");
             newUser.setEmail(email);
@@ -54,4 +63,6 @@ public class UserService implements UserDetailsService {
             userRepo.save(newUser);
         }
     }
+
+
 }

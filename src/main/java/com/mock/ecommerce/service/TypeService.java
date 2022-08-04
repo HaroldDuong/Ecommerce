@@ -3,23 +3,20 @@ package com.mock.ecommerce.service;
 import com.mock.ecommerce.entity.Type;
 import com.mock.ecommerce.repo.DAO;
 import com.mock.ecommerce.repo.TypeRepo;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 /**
  * author CuongTTC
  * */
-
 @Service
 @Transactional
 public class TypeService implements DAO<Type> {
 
-    public final TypeRepo typeRepo;
+    private final TypeRepo typeRepo;
 
-    @Autowired
     public TypeService(TypeRepo typeRepo) {
         this.typeRepo = typeRepo;
     }
@@ -27,7 +24,7 @@ public class TypeService implements DAO<Type> {
 
     @Override
     public List<Type> findALl() {
-        return typeRepo.findAll() ;
+        return typeRepo.findAll();
     }
 
     @Override
@@ -49,3 +46,4 @@ public class TypeService implements DAO<Type> {
         return typeRepo.findByCategoryId(id);
     }
 }
+//commit

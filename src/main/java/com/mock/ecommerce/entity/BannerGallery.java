@@ -12,13 +12,13 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "banner_gallery")
-@Data
 @AllArgsConstructor
 @RequiredArgsConstructor
+@Data
 public class BannerGallery {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private  Long id;
 
 
     @Column(columnDefinition = "LONGBLOB")

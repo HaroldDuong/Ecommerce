@@ -16,12 +16,14 @@ import javax.persistence.*;
 @RequiredArgsConstructor
 @Data
 public class ImageGallery {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private  Long id;
 
-    @Column(columnDefinition = "LONGLOB")
+    @Column(columnDefinition = "LONGBLOB")
     private byte[] image;
 
 
 }
+

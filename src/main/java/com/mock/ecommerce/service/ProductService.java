@@ -3,18 +3,16 @@ package com.mock.ecommerce.service;
 import com.mock.ecommerce.entity.Product;
 import com.mock.ecommerce.repo.DAO;
 import com.mock.ecommerce.repo.ProductRepo;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.util.Calendar;
 import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- *  author CuongTTC
- * */
-
+ * author CuongTTC
+ */
 @Service
 @Transactional
 public class ProductService implements DAO<Product> {
@@ -22,14 +20,14 @@ public class ProductService implements DAO<Product> {
 
     private final ProductRepo productRepo;
 
-    @Autowired
     public ProductService(ProductRepo productRepo) {
         this.productRepo = productRepo;
     }
 
+
     @Override
     public List<Product> findALl() {
-        return productRepo.findAll();
+        return  productRepo.findAll().stream().filter(p->p.isEnabled() == true).collect(Collectors.toList());
     }
 
     @Override
@@ -47,59 +45,55 @@ public class ProductService implements DAO<Product> {
         productRepo.deleteById(id);
     }
 
-    public List<Product> findByCategoryId(Long categoryId){
-        return productRepo.findByCategoryId(categoryId).stream().filter(product->product.isEnabled() == true).collect(Collectors.toList());
+    public List<Product> findByCategoryId(Long categoryId) {
+        return productRepo.findByCategoryId(categoryId).stream().filter(p->p.isEnabled() == true).collect(Collectors.toList());
     }
 
-    public List<Product> findByCategoryIdAndBrandId(Long categoryId, Long brandId){
-        return productRepo.findByCategoryAndBrandId(categoryId, brandId).stream().filter(product->product.isEnabled() == true).collect(Collectors.toList());
-    }
+//    public List<Product> findByCategoryIdAndBrandId(Long categoryId, Long brandId) {
+//        return productRepo.findByCategoryIdAndBrandId(categoryId, brandId).stream().filter(p->p.isEnabled() == true).collect(Collectors.toList());
+//    }
 
-    public List<Product> findByCategoryIdAndTypeId(Long categoryId, Long typeId){
-        return productRepo.findByCategoryAndTypeId(categoryId, typeId).stream().filter(product -> product.isEnabled() == true).collect(Collectors.toList());
-    }
+//    public List<Product> findByCategoryIdAndTypeId(Long categoryId, Long typeId) {
+//        return repofindByCategoryIdAndTypeId(categoryId, typeId).stream().filter(p->p.isEnabled() == true).collect(Collectors.toList());
+//    }
 
-    public List<Product> findByBrandId(Long brandId){
-        return productRepo.findByBrandId(brandId).stream().filter(product -> product.isEnabled() == true).collect(Collectors.toList());
-    }
+//    public List<Product> findByBrandId(Long brandId) {
+//        return repofindByBrandId(brandId).stream().filter(p->p.isEnabled() == true).collect(Collectors.toList());
+//    }
 
-    public List<Product> findByTypeName(String typeName){
-        return productRepo.findByTypeName(typeName).stream().filter(product -> product.isEnabled() == true).collect(Collectors.toList());
-    }
+//    public List<Product> findByTypeName(String typeName) {
+//        return repofindByTypeName(typeName).stream().filter(p->p.isEnabled() == true).collect(Collectors.toList());
+//    }
 
-    public List<Product> findByPriceBetween(Double min, Double max){
-        return productRepo.findByPriceBetween(min, max).stream().filter(product -> product.isEnabled() == true).collect(Collectors.toList());
-    }
+//    public List<Product> findByPriceBetween(Double min, Double max) {
+//        return repofindByPriceBetween(min, max).stream().filter(p->p.isEnabled() == true).collect(Collectors.toList());
+//    }
 
-    public List<Product> findByeProductName(String keyword){
-        return productRepo.findProductContains(keyword).stream().filter(product -> product.isEnabled() == true).collect(Collectors.toList());
-    }
-
-    public List<Product> findByProductNameAndCategoryId(String productName,Long categoryId){
-        return productRepo.findByProductNameContainsAndCategoryId(productName, categoryId).stream().filter(product -> product.isEnabled() == true).collect(Collectors.toList());
-    }
-
-    public List<Product> findAllIgnoreStatus(){
-        return productRepo.findAll();
-    }
-
-    public List<Product> findTopFive(){
-        Calendar calendar = Calendar.getInstance();
-        int month = calendar.get(Calendar.MONTH)+1;
-        int year = calendar.get(Calendar.YEAR);
-
-        return productRepo.findTop5(month, year).stream().filter(product -> product.isEnabled() == true).collect(Collectors.toList());
-    }
-
-    public List<Product> findProductContains(String keyword){
-        return productRepo.findProductContains(keyword).stream().filter(product -> product.isEnabled() == true).collect(Collectors.toList());
-    }
-
-    public List<Product> findProductContainsByCategoryId(String keyword, Long categoryId){
-        return productRepo.findProductContainsByCategory(keyword, categoryId).stream().filter(product -> product.isEnabled() == true).collect(Collectors.toList());
-    }
+//    public List<Product> findByProductName(String productName) {
+//        return repofindByProductNameContains(productName).stream().filter(p->p.isEnabled() == true).collect(Collectors.toList());
+//    }
 
 
+//    public List<Product> findByProductNameAndCategoryId(String productName,Long categoryId) {
+//        return repofindByProductNameContainsAndAndCategoryId(productName, categoryId).stream().filter(p->p.isEnabled() == true).collect(Collectors.toList());
+//    }
 
+//    public List<Product> findAllIgnoreStatus(){
+//        return repofindAll();
+//    }
+
+//    public List<Long> findTop5(){
+//		Calendar c = Calendar.getInstance();
+//		int month = c.get(Calendar.MONTH) + 1;
+//		int year = c.get(Calendar.YEAR);
+//        return repofindTop5(month, year);
+//    }
+//
+//    public List<Product> findProductContains(String keyword){
+//        return repofindProductContains(keyword);
+//    }
+//    public List<Product> findProductContainsByCategoryId(String keyword, Long categoryId){
+//        return repofindProductContainsByCategory(keyword,categoryId);
+//    }
 
 }

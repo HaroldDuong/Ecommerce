@@ -18,9 +18,10 @@ import java.util.List;
 @RequiredArgsConstructor
 @Data
 public class CustomerOrder {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private  Long id;
 
     private String deliverCustomerName;
     private String deliverCustomerAddress;
@@ -30,17 +31,17 @@ public class CustomerOrder {
     private Date orderDate;
     private boolean status;
 
-    @ManyToOne(targetEntity = Customer.class)
+    @ManyToOne (targetEntity = Customer.class)
     private Customer customer;
-    @OneToMany(targetEntity = CartItem.class, cascade = CascadeType.ALL)
+    @OneToMany(targetEntity = CartItem.class,cascade=CascadeType.ALL,fetch = FetchType.EAGER)
     private List<CartItem> cartItems;
 
     @PrePersist
-    void orderDate(){
+    void orderDate() {
         this.orderDate = new Date();
     }
 
-    public CustomerOrder(String deliverCustomerName, String deliverCustomerAddress, String deliverCustomerPhone, double totalPrice, boolean status, Customer customer, List<CartItem> cartItems) {
+    public CustomerOrder(String deliverCustomerName, String deliverCustomerAddress, String deliverCustomerPhone, double totalPrice, boolean status, Customer customer,List<CartItem> cartItems) {
         this.deliverCustomerName = deliverCustomerName;
         this.deliverCustomerAddress = deliverCustomerAddress;
         this.deliverCustomerPhone = deliverCustomerPhone;
@@ -49,4 +50,6 @@ public class CustomerOrder {
         this.customer = customer;
         this.cartItems = cartItems;
     }
+
+
 }

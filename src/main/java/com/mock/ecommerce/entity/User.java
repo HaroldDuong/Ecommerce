@@ -10,13 +10,13 @@ import javax.persistence.*;
 /**
  * author: CuongTTC
  */
-
 @Entity
 @Table(name = "users")
 @AllArgsConstructor
 @RequiredArgsConstructor
 @Data
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -25,7 +25,7 @@ public class User {
     private String password;
     private String email;
     private String role;
-    private boolean enabled;
+    private boolean enabled ;
 
     public User(String username, String password, String email, String role, boolean enabled) {
         this.username = username;
@@ -41,8 +41,6 @@ public class User {
                 passwordEncoder.encode(password),
                 email,
                 "ROLE_USER",
-                true
-
-        );
+                true);
     }
 }

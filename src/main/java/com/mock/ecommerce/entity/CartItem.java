@@ -9,7 +9,6 @@ import javax.persistence.*;
 /**
  * author: CuongTTC
 * */
-
 @Entity
 @Table(name = "cart_item")
 @AllArgsConstructor
@@ -18,7 +17,7 @@ import javax.persistence.*;
 public class CartItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private  Long id;
 
     @OneToOne(targetEntity = Product.class)
     private Product product;

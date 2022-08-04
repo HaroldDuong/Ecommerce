@@ -12,23 +12,24 @@ import java.util.Date;
 * */
 
 @Entity
-@Table(name = "category")
+@Table(name = "categories")
 @AllArgsConstructor
 @RequiredArgsConstructor
 @Data
 public class Category {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private  Long id;
 
     private String name;
     private Date updated;
     private boolean enabled;
 
+
     @PrePersist
-    void updated(){
+    void updated() {
         this.updated = new Date();
     }
-
 
 }

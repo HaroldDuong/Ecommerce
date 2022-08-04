@@ -2,6 +2,7 @@ package com.mock.ecommerce.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -15,12 +16,12 @@ import java.util.Collection;
  * */
 
 @Data
-@RequiredArgsConstructor
+@NoArgsConstructor
 @AllArgsConstructor
 public class UserDetail implements UserDetails {
     User user;
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities(){
+    public Collection<? extends GrantedAuthority> getAuthorities() {
         return Arrays.asList(new SimpleGrantedAuthority(user.getRole()));
     }
 
@@ -33,6 +34,7 @@ public class UserDetail implements UserDetails {
     public String getUsername() {
         return user.getUsername();
     }
+
 
     @Override
     public boolean isAccountNonExpired() {
@@ -53,5 +55,4 @@ public class UserDetail implements UserDetails {
     public boolean isEnabled() {
         return user.isEnabled();
     }
-
 }

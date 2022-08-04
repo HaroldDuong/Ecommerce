@@ -15,27 +15,28 @@ import java.util.Date;
 public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private  Long id;
 
     private double amount;
     private Date paymentDate;
-    private String paymentMethod; // cash, paypal...
+    private String paymentMethod; //cash, paypal
     private boolean status;
     private boolean tracked;
 
     @OneToOne(targetEntity = CustomerOrder.class)
     private CustomerOrder customerOrder;
 
-    public Payment(double amount, Date paymentDate, boolean status, CustomerOrder customerOrder) {
+    public Payment(double amount, String paymentMethod, boolean status, CustomerOrder customerOrder) {
         this.amount = amount;
-        this.paymentDate = paymentDate;
+        this.paymentMethod = paymentMethod;
         this.status = status;
         this.customerOrder = customerOrder;
     }
 
     @PrePersist
-    void orderDate(){
+    void orderDate() {
         this.paymentDate = new Date();
         this.tracked = false;
     }
+
 }

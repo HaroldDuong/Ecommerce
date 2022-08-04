@@ -9,30 +9,31 @@ import javax.persistence.*;
 /**
  * author: CuongTTC
 * **/
-
 @Entity
-@Table(name = "contact")
+@Table(name = "contacts")
 @AllArgsConstructor
 @RequiredArgsConstructor
 @Data
 public class Contact {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private  Long id;
 
     private String name;
     private String email;
     private String subject;
     private boolean status;
 
-    @Column(columnDefinition = "LONGTEXT")
-    private  String message;
+    @Column (columnDefinition = "LONGTEXT")
+    private String message;
 
-    @Column(columnDefinition = "LONGTEXT")
+    @Column (columnDefinition = "LONGTEXT")
     private String reply;
 
     @PrePersist
-    void setStatus(){
+    void setStatus() {
         this.status = false;
     }
+
 }

@@ -5,8 +5,8 @@ import com.mock.ecommerce.repo.CategoryRepo;
 import com.mock.ecommerce.repo.DAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 /**
@@ -27,7 +27,7 @@ public class CategoryService implements DAO<Category> {
 
     @Override
     public List<Category> findALl() {
-        return categoryRepo.findAll() ;
+        return categoryRepo.findAll();
     }
 
     @Override
@@ -45,3 +45,4 @@ public class CategoryService implements DAO<Category> {
         categoryRepo.deleteById(id);
     }
 }
+//commit

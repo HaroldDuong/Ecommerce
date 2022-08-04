@@ -12,8 +12,9 @@ import java.util.List;
 @Repository
 public interface CustomerOrderRepo extends JpaRepository<CustomerOrder, Long> {
 
-    CustomerOrder findTopOneCustomerIdOrderByOrderDateDesc(Long customerId);
 
-    List<CustomerOrder> findByCustomerIdOrderByOrderDateDesc (Long customerId);
+    //CustomerOrder findTopOneCustomerIdOrderByOrderDateDesc(Long customerId);
+
+    //List<CustomerOrder> findByCustomerIdOrderByOrderDateDesc (Long customerId);
 
 }

@@ -19,7 +19,7 @@ public interface ProductRepo extends JpaRepository<Product, Long> {
      List<Product> findByCategoryAndBrandId(Long categoryId, Long brandId);
      List<Product> findByCategoryAndTypeId(Long categoryId, Long typeId);
      List<Product> findByPriceBetween(Double min, Double max);
-     List<Product> findByProductContains(String keyword);
+ //    List<Product> findByProductContains(String keyword);
      List<Product> findByProductNameContainsAndCategoryId(String productName, Long categoryId);
 
 
@@ -46,7 +46,7 @@ public interface ProductRepo extends JpaRepository<Product, Long> {
      List<Product> findProductContainsByCategory(@Param("keyword") String keyword , @Param("id") Long categoryId);
 
 
-
+/*
      @Query(value = "SELECT * FROM products p " +
              "LEFT JOIN brands b on p.brand_id = b.id " +
              "LEFT JOIN categories c ON p.category_id = c.id " +
@@ -57,5 +57,5 @@ public interface ProductRepo extends JpaRepository<Product, Long> {
              "OR t.name LIKE %:keyword% " +
              "GROUP BY p.id " +
              "HAVING p.enable = true ",nativeQuery = true)
-     List<Product> findProductContains(@Param("keyword") String keyword);
+     List<Product> findProductContains(@Param("keyword") String keyword);*/
 }

@@ -5,44 +5,42 @@ import com.mock.ecommerce.repo.BannerGalleryRepo;
 import com.mock.ecommerce.repo.DAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.util.List;
-
 /**
- * author CuongTTC
- * */
+* author : CuongTTC
+* */
 @Service
 @Transactional
 public class BannerGalleryService implements DAO<BannerGallery> {
+	private final BannerGalleryRepo bannerGalleryRepo;
 
-    private final BannerGalleryRepo bannerGalleryRepo;
+	@Autowired
+	public BannerGalleryService(BannerGalleryRepo bannerGalleryRepo) {
+		this.bannerGalleryRepo = bannerGalleryRepo;
+	}
 
-    @Autowired
-    public BannerGalleryService(BannerGalleryRepo bannerGalleryRepo) {
-        this.bannerGalleryRepo = bannerGalleryRepo;
-    }
 
-    @Autowired
+	@Override
+	public List<BannerGallery> findALl() {
+		return bannerGalleryRepo.findAll();
+	}
 
-    @Override
-    public List<BannerGallery> findALl() {
-        return bannerGalleryRepo.findAll();
-    }
+	@Override
+	public BannerGallery findById(Long id) {
+		return bannerGalleryRepo.getOne(id);
+	}
 
-    @Override
-    public BannerGallery findById(Long id) {
-        return bannerGalleryRepo.getById(id);
-    }
+	@Override
+	public void save(BannerGallery vo) {
+		bannerGalleryRepo.save(vo);
+		
+	}
 
-    @Override
-    public void save(BannerGallery vo) {
-        bannerGalleryRepo.save(vo);
+	@Override
+	public void delete(Long id) {
+		bannerGalleryRepo.deleteById(id);
+	}
 
-    }
-
-    @Override
-    public void delete(Long id) {
-        bannerGalleryRepo.deleteById(id);
-    }
 }

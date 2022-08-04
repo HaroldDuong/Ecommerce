@@ -19,12 +19,13 @@ import javax.persistence.*;
 public class ResetPassword {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private  Long id;
 
     private String resetToken;
 
     @OneToOne(targetEntity = User.class)
     private User user;
+
 
     public ResetPassword(String resetToken, User user) {
         this.resetToken = resetToken;

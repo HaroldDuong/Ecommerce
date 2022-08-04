@@ -6,25 +6,23 @@ import com.mock.ecommerce.repo.DAO;
 import com.mock.ecommerce.repo.ResetPasswordRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 /**
  * author CuongTTC
  * */
-
 @Service
 @Transactional
 public class ResetPasswordService implements DAO<ResetPassword> {
-
-
     private final ResetPasswordRepo resetPasswordRepo;
 
     @Autowired
-    public ResetPasswordService(ResetPasswordRepo resetPasswordRepo){
+    public ResetPasswordService(ResetPasswordRepo resetPasswordRepo) {
         this.resetPasswordRepo = resetPasswordRepo;
     }
+
 
     @Override
     public List<ResetPassword> findALl() {

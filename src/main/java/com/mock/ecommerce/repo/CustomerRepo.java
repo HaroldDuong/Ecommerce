@@ -1,8 +1,10 @@
 package com.mock.ecommerce.repo;
 
 import com.mock.ecommerce.entity.Customer;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+
 
 /**
  * author CuongTTC

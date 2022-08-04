@@ -2,6 +2,7 @@ package com.mock.ecommerce.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.core.user.OAuth2User;
@@ -14,26 +15,27 @@ import java.util.Map;
  * */
 
 @Data
-@RequiredArgsConstructor
+@NoArgsConstructor
 @AllArgsConstructor
 public class UserOAuth implements OAuth2User {
-    private OAuth2User oAuth2User;
+    private OAuth2User oauth2User;
+
     @Override
     public Map<String, Object> getAttributes() {
-        return oAuth2User.getAttributes();
+        return oauth2User.getAttributes();
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return oAuth2User.getAuthorities();
+        return oauth2User.getAuthorities();
     }
 
     @Override
     public String getName() {
-        return oAuth2User.getAttribute("name");
+        return oauth2User.getAttribute("name");
     }
 
-    public String getEmail(){
-        return oAuth2User.getAttribute("email");
+    public String getEmail() {
+        return oauth2User.<String>getAttribute("email");
     }
 }
